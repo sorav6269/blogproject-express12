@@ -1,0 +1,146 @@
+<%-include('./header.ejs')%>
+
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <br><br><br>
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+
+            <div class="col-md-6 mt-5 mb-5 text-center justify-content card">
+                <div class="login-box card-body">
+                    <h1 class="b">CREATE YOUR BLOG</h1>
+
+                    <% if(msg.length> 0){ %>
+                        <div class="alert alert-danger">
+                            <!--To Print-->
+                            <%= msg %>
+                        </div>
+                    <%} %>
+                    <form action="/UesrInsert" method="post" id="myvalidation" enctype="multipart/form-data">
+                        <div class="form-group mb-3 mt-4" style="font-weight: 100;">
+                            <input type="text" name="name" placeholder="name" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3 mt-4" style="font-weight: 100;">
+                            <input type="email" name="email" placeholder="Email or Username" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3 mt-4" style="font-weight: 100;">
+                            <input type="password" id="password" name="password" placeholder="Password" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3 mt-4" style="font-weight: 100;">
+                            <input type="password" name="cpassword" placeholder="CPassword" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3 mt-4" style="font-weight: 100;">
+                            <input type="number" name="phone" placeholder="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3 mt-4" style="font-weight: 100;">
+                            <input type="text" name="address" placeholder="addresh" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3 mt-4" style="font-weight: 100;">
+                            <input type="file" name="image" class="form-control" required>
+                        </div>
+                    
+                        <h5 class="b ">creat a new account</h5>
+                        <div class="form-group mb-3 mt-4">
+                           <button type="submit">Sign in</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br><br>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+    $(function () {
+
+        let $registerForm = $('#myvalidation')
+    
+        $registerForm.validate({
+            rules: {
+                name: {
+                    required: true,
+                    lettersOnly: true
+                },
+                phone: {
+                    required: true,
+                    numericonly: true,
+                    minlength:10,
+                    maxlength:12
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                },
+                cpassword: {
+                    required: true,
+                    equalTo:"#password"
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+               
+    
+            },
+            messages: {
+                name: {
+                    required: "name must be required",
+                    lettersOnly: "invalid name"
+                },
+                phone: {
+                    required: "Mobile must be required",
+                    numericonly: "Phone number Invalid",
+                    minlength: 'min 10 digit',
+                    maxlength: 'mx 12 digit'
+    
+                },
+                password: {
+                    required: "Password must be required",
+                    minlength: 'min 6 digit',
+                    
+                   
+                    
+                },
+                cpassword: {
+                    required: "Confirm Password must be required",
+                    equalTo:"Password mismatch"
+                    
+                },
+                email: {
+                    required: "Email must be required",
+                    email: "invalid email"
+                },
+               
+            },
+            errorPlacement: function (error, element) {
+                if (element.is(":radio")) {
+                    error.appendTo(element.parents(".gen"));
+                } else {
+                    error.insertAfter(element)
+                }
+            }
+    
+    
+        })
+    
+    
+        jQuery.validator.addMethod("lettersOnly", function (value, element) {
+            return  /^[a-z," "]+$/i.test(value);
+        }, "Letters and spaces only please");
+    
+        jQuery.validator.addMethod("numericonly", function (value, element) {
+            return /^[0-9]+$/i.test(value);
+        }, "Please enternumber only.");
+    
+    
+    })</script>
+
+<%-include('./footer.ejs')%>

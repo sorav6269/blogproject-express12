@@ -1,0 +1,109 @@
+<%-include('./header.ejs')%>
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <br><br><br>
+
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+
+            <div class="col-md-6 mt-5 mb-5 text-center justify-content card">
+                <div class="login-box card-body">
+                    <h1 class="b">LOG IN</h1>
+                    <% if(msg1.length> 0){%>
+                        <div class="alert alert-success">
+                            <!--to print-->
+                            <%= msg1 %>
+                        </div>
+                    <%} %>
+                    <% if(msg2.length> 0){%>
+                        <div class="alert alert-danger">
+                            <!--to print-->
+                            <%= msg2 %>
+                        </div>
+                    <%} %>
+                    <form action="/verifylogin" id="myvalidation" method="post">
+                        <div class="form-group mb-3 mt-4" style="font-weight: 100;">
+                            <input type="email" name="email" placeholder="Email or Username" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3 mt-4" style="font-weight: 100;">
+                            <input type="password" name="password" placeholder="Password" class="form-control" required>
+                        </div>
+                        <div class="form-group mb-3 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg bb">Log In</button>
+                        </div>
+                        <h5 class="b ">creat a new account</h5>
+                        <div class="form-group mb-3 mt-4">
+                            <a href="/signin" class="btn btn-primary btn-lg bb"
+                                style="text-transform: uppercase;">Sign in</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br><br>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+
+let $registerForm = $('#myvalidation')
+
+$registerForm.validate({
+    rules: {
+        email: {
+            required: true,
+            email: true
+        },
+        password: {
+            required: true,
+            minlength: 6,
+            
+          
+        },
+        
+    messages: {
+       
+        password: {
+            required: "Password must be required",
+            minlength: 'min 6 digit',   
+        }
+       
+        },
+        email: {
+            required: "Email must be required",
+            email: "invalid email"
+        },
+      
+    },
+    errorPlacement: function (error, element) {
+        if (element.is(":radio")) {
+            error.appendTo(element.parents(".gen"));
+        } else {
+            error.insertAfter(element)
+        }
+    }
+
+
+})
+
+
+jQuery.validator.addMethod("lettersOnly", function (value, element) {
+    return  /^[a-z," "]+$/i.test(value);
+}, "Letters and spaces only please");
+
+jQuery.validator.addMethod("numericonly", function (value, element) {
+    return /^[0-9]+$/i.test(value);
+}, "Please enternumber only.");
+
+
+})
+    </script>
+
+<%-include('./footer.ejs')%>

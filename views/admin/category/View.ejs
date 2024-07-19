@@ -1,0 +1,98 @@
+<%-include("../header.ejs")%>
+    <%-include("../sidebar.ejs")%>
+
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">Category view</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Category View</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <div class="content">
+                <div class="container-fluid">
+
+                    <!-- /.card -->
+
+                    <div class="card">
+                        <div class="card-header">
+                            
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        
+                                    </tr>
+                                </thead>
+                                   
+                                    <tr>
+                                        <td><%= v.id %></td>
+                                        <td><%= v.name %></td>
+                                        
+                                    </tr>
+                                   
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+<!-- category modal -->
+        <div class="modal fade" id="category">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Category</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/admin/categoryInsert" method="post">
+                            <div class="from-group">
+                                <label for="">Category Name</label>
+                                <input type="text" name="n" class="form-control">
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-info">submit</button>
+                        </form>
+                    </div>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <%-include("../footer.ejs") %>

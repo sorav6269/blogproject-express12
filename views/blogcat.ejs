@@ -1,0 +1,29 @@
+<%-include('./header.ejs')%>
+
+<br><br>
+
+<div class="container mt-3">
+    <h1 class="text-center a">BLOG LIST</h1>
+    <div class="row">
+        <% bc.forEach((item)=>{ %>
+
+        <div class="col-md-4 mt-5">
+            <div class="card shadow-lg h-100">
+                <img src="<%= item.image.url %>"
+                    alt="" height="280px">
+                <p style="text-transform: uppercase;">sanni, <span> <%= item.createdAt.toLocaleDateString() %></span></p>
+                <div class="card-body">
+                    <h3><%= item.title %></h3>
+                    <p><%= item.description.slice(0,90)  %></p>
+                    <a href="/details/<%=item.id%> " class="btn btn-danger btn-lg " style="text-transform: uppercase;">read more</a>
+                </div><!--cardbody end-->
+
+            </div><!--card end-->
+        </div>
+
+    <% }) %>
+    </div><!--row end-->
+</div><!--container end-->
+<br><br>
+
+<%-include('./footer.ejs')%>
