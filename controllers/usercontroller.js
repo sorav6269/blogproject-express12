@@ -42,24 +42,24 @@ class UserController {
                             url: uploadImage.secure_url
                         }
                     })
-                   const userdata = await result.save();
-
-                   //console.log(userdata)
-                   if (userdata){
-                    const token = jwt.sign({ID:userdata._id},"pnidnfmsfhd7327632nsx7");
-                    //console.log(token)
-                    res.cookie("token",token);
-                    this.sendVerifymail(name,email,userdata._id);
-                    //to redirect to login page
+                 const userdata =  await result.save()
+                 
+                //  console.log(userdata)
+                if(userdata){
+                    const token = jwt.sign({ID: userdata._id},"pnidnfmsfhd7327632nsx7")
+                    // console.log(token)
+                    res.cookie("token",token)
+                    this.sendVerifymail(name, email,userdata._id)
                     req.flash(
                         "success",
-                        "your Registration has been successfully.please verify your email."
+                        "your Registration has been successfully. Please verify your mail"
                     );
-                    res.redirect("/signin");
-                   }else{
-                    req.flash("error","Not Register.");
-                    res.redirect("/signin");
-                   }
+                    res.redirect("/login")
+                }else{
+                    req.flash('error',"Not Register.")
+                    res.redirect('/login')
+                }
+
                 } else {
                     req.flash('error', 'password and confirm password not match')
                     res.redirect('./signin')
@@ -89,7 +89,7 @@ class UserController {
                         res.redirect('/admin/dashboard')
 
                     }
-                    if (user.role == "user" && user.is_verified==1 && user.status == "approved") {
+                    if (user.role == "user"  && user.status == "approved") {
                         let token = jwt.sign({ ID: user.id }, 'pnidnfmsfhd7327632nsx7');
                         // console.log(token)
                         res.cookie('token', token)
@@ -147,8 +147,8 @@ class UserController {
             const id = req.params.id
             //console.log(id)
             const display = await UserModel.findById(id)
-            //  console.log(category)
-            res.render('admin/user/view', {n:name,i:image, d:display,role:role })
+            //  console.log(display)
+            res.render('admin/user/view', {n:name,i:image,role:role })
         } catch (error) {
             console.log(error)
         }
@@ -157,34 +157,37 @@ class UserController {
         try {
             await UserModel.findByIdAndDelete(req.params.id)
             req.flash('success', 'blog Delete Success')
-            res.redirect('/updateStatus')
+            res.redirect('/users')
         } catch (error) {
             console.log(error)
         }
 
     }
-    static sendEmail = async(name,email,status)=>{
+
+
+    static sendEmail = async (name, email,status) => {
         console.log(name,email,status)
-
+      
         let transporter = await nodemailer.createTransport({
-            host:"smtp.gmail.com",
-            port:587,
-
-            auth:{
-                user:"patsariya.abhi@gmail.com",
-                pass:"mjisqrzzblyenhje"
-            },
+          host: "smtp.gmail.com",
+          port: 587,
+    
+          auth: {
+            user: "soravrathor786@gmail.com",
+            pass: "lemklfaiygabtcrk",
+          },
         });
         let info = await transporter.sendMail({
-            from: "test@gmail.com", // sender address
-            to: email, // list of receivers
-            subject: `login ${status}`, // Subject line
-            text: "heelo", // plain text body
-            html: `<b>${name}</b> login ${status}`,
+          from: "test@gmail.com", // sender address
+          to: email, // list of receivers
+          subject: `Login ${status}`, // Subject line
+          text: "hello", // plain text body
+          html: `<b>${name}</b> login  ${status} `, // html body
         });
+        // console.log("Messge sent: %s", info.messageId);
     };
 
-
+    
     static sendVerifymail = async (name, email,user_id) => {
         console.log(name,email,user_id)
       
@@ -193,38 +196,34 @@ class UserController {
           port: 587,
     
           auth: {
-            user: "soravrathor@gmail.com",
-            pass: "",
+            user: "soravrathor786@gmail.com",
+            pass: "lemklfaiygabtcrk",
           },
         });
         let info = await transporter.sendMail({
           from: "test@gmail.com", // sender address
           to: email, // list of receivers
-          subject: "For verification mail", // Subject line
-          text: "heelo", // plain text body
-          html: 
-          "<p>Hii" +
-          name +
-          'please click here to<a href ="http://localhost:3000/verify?id='+ 
-          user_id +
-        '">verify</a>your mail</p>.'
-            });
-        //console.log(info);
-      };
-
-    static verifymail=async(req,res)=>{
-        try{
-            const updateinfo = await UserModel.findByIdAndUpdate(req.query.id, {
-                is_verified:1,
-            });
-            if(updateinfo)
-            {
-                res.redirect("/login");
-            }
-        }catch(error){
-            console.log(error);
-        }
+          subject: `Login `, // Subject line
+          text: "hello", // plain text body
+          html:  
+          "<p>Hii"+
+          name+ 
+          'Please click here to <a href="http://localhost:3000/verify?id='+user_id +'">Verify</a>Your mail</p>' // html body
+        });
+        console.log("Messge sent: %s", info.messageId);
     };
 
+    static verifyMail = async (req,res)=>{
+        try {
+            const updateinfo = await UserModel.findByIdAndUpdate(req.query.id,{
+                is_verified: 1,
+            });
+            if(updateinfo){
+                res.redirect('/login')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 module.exports = UserController

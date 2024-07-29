@@ -41,11 +41,11 @@ const UserSchema = mongoose.Schema({
         default:"user"
     },
     token:{
-        type:String
+type:String
     },
     is_verified:{
         type:Number,
-        defult:0
+        default:0
     }
 
 }, { timestamps: true })

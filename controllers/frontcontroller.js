@@ -1,5 +1,6 @@
 const BlogModel = require('../models/blog')
 const CategoryModel = require('../models/category')
+const UserModel = require('../models/user')
 class frontcontroller {
 
     static home = async (req, res) => {
@@ -83,6 +84,7 @@ class frontcontroller {
         }
     }
 
+  
 }
 
 module.exports = frontcontroller

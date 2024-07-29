@@ -48,7 +48,7 @@ route.get('/admin/userDelete/:id',checkAuth,UserController.userDelete)
 route.get('/admin/userView/:id',checkAuth,UserController.userView)
 
 //verify mail
-route.get('/verify',UserController.verifymail)
+route.get('/verify',UserController.verifyMail)
 
 
 module.exports = route
