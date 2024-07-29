@@ -163,7 +163,7 @@ class UserController {
         }
 
     }
-    static sandEmail = async(name,email,status)=>{
+    static sendEmail = async(name,email,status)=>{
         console.log(name,email,status)
 
         let transporter = await nodemailer.createTransport({
@@ -193,8 +193,8 @@ class UserController {
           port: 587,
     
           auth: {
-            user: "patsariya.abhi@gmail.com",
-            pass: "mjisqrzzblyenhje",
+            user: "soravrathor@gmail.com",
+            pass: "",
           },
         });
         let info = await transporter.sendMail({
@@ -207,7 +207,7 @@ class UserController {
           name +
           'please click here to<a href ="http://localhost:3000/verify?id='+ 
           user_id +
-        '">verify</a>your mail</p>.',
+        '">verify</a>your mail</p>.'
             });
         //console.log(info);
       };
