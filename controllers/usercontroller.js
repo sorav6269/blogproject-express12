@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken')
 const nodemailer  = require('nodemailer')
 
 cloudinary.config({
-    cloud_name: 'dyblatmzo',
-    api_key: '757875579268529',
-    api_secret: 'OaD3lbfPxv_CrCd-pcIFiOtlDKw' // Click 'View Credentials' below to copy your API secret
+    cloud_name: 'dwovzxxol',
+    api_key: '227631891845838',
+    api_secret: 'fF1pNSbC9dBhtUDQr5XEbkErkww' // Click 'View Credentials' below to copy your API secret
 });
 
 
