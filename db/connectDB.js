@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const localURL = "mongodb://127.0.0.1:27017/blogprojectexpress"
-const liveUrl= "mongodb+srv://soravrathor786:sorav1@cluster0.tkmjxwk.mongodb.net/blogproject?retryWrites=true&w=majority&appName=Cluster0"
+const liveUrl= "mongodb+srv://soravrathor786:soravrathor@cluster0.tkmjxwk.mongodb.net/blogproject?retryWrites=true&w=majority&appName=Cluster0"
 
 const connect = () => {
     return mongoose.connect(liveUrl)
